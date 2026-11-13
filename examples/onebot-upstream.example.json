@@ -1,0 +1,14 @@
+{
+  "self_id": 123456789,
+  "base_url": "http://127.0.0.1:5701",
+  "access_token_env": "HEREDITY_UPSTREAM_TOKEN",
+  "actions": {
+    "get_login_info": {"path": "/get_login_info", "response_path": ["data"]},
+    "get_friend_list": {"path": "/get_friend_list", "response_path": ["data"]},
+    "get_group_list": {"path": "/get_group_list", "response_path": ["data"]},
+    "send_private_msg": {"path": "/send_private_msg", "response_path": ["data"]},
+    "send_group_msg": {"path": "/send_group_msg", "response_path": ["data"]},
+    "get_msg": {"path": "/get_msg", "response_path": ["data"]},
+    "delete_msg": {"path": "/delete_msg", "response_path": ["data"]}
+  }
+}

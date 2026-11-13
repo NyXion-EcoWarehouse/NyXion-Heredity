@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nyxion:heredity:sdk:1:contracts",
+  "title": "NyXion Heredity SDK v1 contract object snapshots",
+  "description": "Embedded execution is implemented. These definitions do not declare an existing RPC transport. Cross-object account, epoch, request and nonce correlations are enforced by the host.",
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"},
+    "uiPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "view", "icon"],
+      "properties": {
+        "id": {"type": "string", "maxLength": 64, "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"},
+        "title": {"type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[^\\u0000-\\u001F\\u007F]+$"},
+        "view": {"const": "accounts"},
+        "icon": {"const": "users"}
+      }
+    },
+    "session": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "self_id", "session_epoch"],
+      "properties": {
+        "platform": {"type": "string", "maxLength": 128, "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"},
+        "self_id": {"$ref": "#/$defs/identifier"},
+        "session_epoch": {"$ref": "#/$defs/identifier"}
+      }
+    },
+    "hostHello": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instance_id", "nonce", "api_major", "api_minor"],
+      "properties": {
+        "instance_id": {"$ref": "#/$defs/identifier"},
+        "nonce": {"$ref": "#/$defs/identifier"},
+        "api_major": {"type": "integer", "minimum": 1, "maximum": 65535},
+        "api_minor": {"type": "integer", "minimum": 0, "maximum": 65535}
+      }
+    },
+    "pluginHello": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instance_id", "nonce", "plugin_id", "api_major", "api_minor"],
+      "properties": {
+        "instance_id": {"$ref": "#/$defs/identifier"},
+        "nonce": {"$ref": "#/$defs/identifier"},
+        "plugin_id": {"$ref": "#/$defs/identifier"},
+        "api_major": {"type": "integer", "minimum": 1, "maximum": 65535},
+        "api_minor": {"type": "integer", "minimum": 0, "maximum": 65535}
+      }
+    },
+    "heartbeat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instance_id", "nonce", "sequence", "deadline"],
+      "properties": {
+        "instance_id": {"$ref": "#/$defs/identifier"},
+        "nonce": {"$ref": "#/$defs/identifier"},
+        "sequence": {"type": "integer", "minimum": 1, "maximum": 9223372036854775807},
+        "deadline": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "pong": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instance_id", "nonce", "sequence"],
+      "properties": {
+        "instance_id": {"$ref": "#/$defs/identifier"},
+        "nonce": {"$ref": "#/$defs/identifier"},
+        "sequence": {"type": "integer", "minimum": 1, "maximum": 9223372036854775807}
+      }
+    },
+    "actionRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["request_id", "session", "action", "params", "deadline"],
+      "properties": {
+        "request_id": {"$ref": "#/$defs/identifier"},
+        "session": {"$ref": "#/$defs/session"},
+        "action": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.-]{0,127}$"},
+        "params": {"type": "object"},
+        "deadline": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "actionResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["request_id", "outcome", "data", "error_code", "error_message"],
+      "properties": {
+        "request_id": {"$ref": "#/$defs/identifier"},
+        "outcome": {"enum": ["not_started", "completed", "unknown"]},
+        "data": {},
+        "error_code": {"type": ["integer", "null"], "minimum": 1, "maximum": 2147483647},
+        "error_message": {"type": "string", "maxLength": 4096}
+      },
+      "allOf": [{
+        "if": {"properties": {"error_code": {"type": "null"}}},
+        "then": {"properties": {"outcome": {"const": "completed"}, "error_message": {"const": ""}}}
+      }]
+    },
+    "eventEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session", "event_id", "event"],
+      "properties": {
+        "session": {"$ref": "#/$defs/session"},
+        "event_id": {"$ref": "#/$defs/identifier"},
+        "event": {"type": "object"}
+      }
+    },
+    "publishAck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_id", "persisted", "duplicate"],
+      "properties": {
+        "event_id": {"$ref": "#/$defs/identifier"},
+        "persisted": {"type": "boolean"},
+        "duplicate": {"type": "boolean"}
+      },
+      "allOf": [{
+        "if": {"properties": {"duplicate": {"const": true}}},
+        "then": {"properties": {"persisted": {"const": true}}}
+      }]
+    },
+    "sessionUpdate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["session", "state", "reason"],
+      "properties": {
+        "session": {"oneOf": [{"$ref": "#/$defs/session"}, {"type": "null"}]},
+        "state": {"enum": ["starting", "login_required", "authenticating", "online", "offline", "failed", "stopped"]},
+        "reason": {"type": "string", "maxLength": 1024}
+      },
+      "allOf": [{
+        "if": {"properties": {"state": {"const": "online"}}},
+        "then": {"properties": {"session": {"$ref": "#/$defs/session"}}}
+      }]
+    },
+    "challenge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["challenge_id", "kind", "title", "payload", "expires_at"],
+      "properties": {
+        "challenge_id": {"$ref": "#/$defs/identifier"},
+        "kind": {"enum": ["qr", "input", "notice"]},
+        "title": {"type": "string", "minLength": 1, "maxLength": 160},
+        "payload": {"type": "object"},
+        "expires_at": {"type": ["number", "null"], "exclusiveMinimum": 0}
+      }
+    }
+  }
+}

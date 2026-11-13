@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["execution-panel.tsx", "execution-model.ts"]
+}

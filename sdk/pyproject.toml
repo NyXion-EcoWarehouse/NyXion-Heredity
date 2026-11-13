@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nyxion-heredity-sdk"
+version = "1.5.0"
+description = "Standard-library-only SDK contracts for NyXion Heredity platform plugins."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+nyxion-heredity-sdk-check = "nyxion_heredity_sdk.conformance:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["nyxion_heredity_sdk", "nyxion_heredity_sdk.*"]
+
+[tool.setuptools.package-data]
+"nyxion_heredity_sdk" = ["py.typed", "schemas/*.json"]

@@ -1,0 +1,41 @@
+.heredity-execution { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.heredity-execution h2, .heredity-execution h3, .heredity-execution h4, .heredity-execution p, .heredity-execution dl { margin: 0; }
+.heredity-execution h2 { font-size: 17px; font-weight: 650; line-height: 1.4; }
+.heredity-execution h3 { font-size: 14px; font-weight: 650; line-height: 1.5; }
+.heredity-execution h4, .heredity-execution dt { color: var(--muted-foreground); font-size: 12px; font-weight: 500; line-height: 1.6; }
+.heredity-execution code { font-family: var(--font-mono, ui-monospace, monospace); font-size: 12px; overflow-wrap: anywhere; }
+.heredity-execution-page-heading, .heredity-execution-section-heading, .heredity-execution-provider-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-width: 0; }
+.heredity-execution-page-heading > div > p, .heredity-execution-level-heading p { color: var(--muted-foreground); margin-top: 4px; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.heredity-execution-feedback { display: flex; align-items: flex-start; gap: 9px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; color: var(--muted-foreground); font-size: 12px; line-height: 1.7; }
+.heredity-execution-feedback > svg { margin-top: 2px; }
+.heredity-execution-error { border-color: color-mix(in oklab, var(--destructive) 35%, var(--border)); color: var(--destructive); }
+.heredity-execution-current { padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.heredity-execution-section-heading h3 { display: flex; align-items: center; gap: 8px; }
+.heredity-execution-session, .heredity-execution-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 16px !important; }
+.heredity-execution-session dd, .heredity-execution-facts dd { margin: 3px 0 0; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.heredity-execution-provenance, .heredity-execution-channel-note { margin-top: 14px !important; color: var(--muted-foreground); font-size: 12px; line-height: 1.7; }
+.heredity-execution-mechanism { min-width: 0; }
+.heredity-execution-capabilities { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px; margin-top: 18px; font-size: 12px; }
+.heredity-execution-values { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 5px 0 0; padding: 0; list-style: none; }
+.heredity-execution-values li { min-width: 0; overflow-wrap: anywhere; }
+.heredity-execution-levels { border-top: 1px solid var(--border); }
+.heredity-execution-level { padding: 20px 0; border-bottom: 1px solid var(--border); }
+.heredity-execution-level-heading { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: start; gap: 12px; }
+.heredity-execution-level-id { color: var(--primary); font-size: 16px !important; font-weight: 650; line-height: 1.5; }
+.heredity-execution-provider { min-width: 0; margin-top: 16px; padding-left: 52px; }
+.heredity-execution-provider-name { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; min-width: 0; font-size: 12px; }
+.heredity-execution-provider-name strong { font-weight: 600; overflow-wrap: anywhere; }
+.heredity-execution-switch { flex-shrink: 0; min-width: 90px; }
+.heredity-execution-provider-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px !important; color: var(--muted-foreground); font-size: 11px; }
+.heredity-execution-reason { margin-top: 7px !important; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.heredity-execution-provider-details { margin-top: 10px; }
+.heredity-execution-provider-details > summary { color: var(--muted-foreground); cursor: pointer; font-size: 12px; line-height: 1.7; }
+.heredity-execution-provider-details > summary:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+.heredity-execution-empty { padding: 14px 0 0 52px; color: var(--muted-foreground); font-size: 12px; }
+.heredity-execution-other > .heredity-execution-provider { padding-left: 0; }
+@media (max-width: 640px) {
+    .heredity-execution { gap: 20px; }
+    .heredity-execution-session, .heredity-execution-facts, .heredity-execution-capabilities { grid-template-columns: minmax(0, 1fr); }
+    .heredity-execution-provider, .heredity-execution-empty { padding-left: 0; }
+    .heredity-execution-provider-heading { align-items: flex-start; }
+}

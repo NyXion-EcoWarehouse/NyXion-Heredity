@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "plugin_id": "example.offline",
+  "name": "Offline SDK example",
+  "version": "1.0.0",
+  "platform": "example",
+  "execution": "embedded",
+  "api_major": 1,
+  "api_minor": 0,
+  "host_api_min_minor": 0,
+  "host_api_max_minor": 0,
+  "actions": ["get_login_info", "echo"],
+  "capabilities": ["synthetic"],
+  "config_schema": {
+    "type": "object",
+    "properties": {
+      "self_id": {"type": "string", "minLength": 1, "maxLength": 32}
+    },
+    "required": ["self_id"],
+    "additionalProperties": false
+  }
+}

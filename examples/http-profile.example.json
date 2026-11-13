@@ -1,0 +1,17 @@
+{
+  "self_id": 123456789,
+  "base_url": "http://127.0.0.1:3001",
+  "access_token_env": "HEREDITY_BACKEND_TOKEN",
+  "actions": {
+    "get_login_info": {
+      "path": "/replace-with-confirmed-login-route",
+      "method": "POST",
+      "response_path": ["data"]
+    },
+    "send_private_msg": {
+      "path": "/replace-with-confirmed-send-route",
+      "method": "POST",
+      "response_path": ["data"]
+    }
+  }
+}

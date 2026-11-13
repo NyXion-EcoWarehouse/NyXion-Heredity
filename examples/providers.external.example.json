@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "self_id": 123456789,
+  "default_provider": "full-client-local",
+  "providers": [
+    {
+      "id": "full-client-local",
+      "label": "完整客户端外部接口（声明 L2）",
+      "kind": "http_json",
+      "execution_level": "L2",
+      "mechanism": {
+        "in_process_code": true,
+        "business_request_builder": "mixed"
+      },
+      "profile": "onebot-upstream.example.json"
+    },
+    {
+      "id": "attached-client-local",
+      "label": "进程附着外部接口（声明 L1）",
+      "kind": "http_json",
+      "execution_level": "L1",
+      "enabled": false,
+      "profile": "onebot-upstream.example.json"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "self_id": 10000,
+  "default_provider": "demo",
+  "providers": [
+    {
+      "id": "demo",
+      "label": "演示提供方 A",
+      "kind": "demo"
+    },
+    {
+      "id": "demo-secondary",
+      "label": "演示提供方 B",
+      "kind": "demo"
+    }
+  ]
+}

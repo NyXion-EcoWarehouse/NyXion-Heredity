@@ -1,0 +1,2 @@
+include LICENSE README.md NETWORKS.md AEGIS.md
+recursive-include src/nyxion_heredity_sdk *.py py.typed *.json

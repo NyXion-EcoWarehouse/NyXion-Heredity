@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nyxion-heredity"
+version = "26.11.13.post1"
+description = "NyXion Heredity OneBot gateway, UI and embedded plugin host."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = [
+    "nyxion-heredity-sdk>=1.5,<2",
+    "websockets==17.4",
+    "wasmtime==50.0.1",
+]
+
+[project.scripts]
+heredity = "heredity.cli:main"
+nyxion-heredity = "heredity.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["heredity", "heredity.*"]
+exclude = ["nyxion_heredity_sdk*"]
+
+[tool.setuptools.package-data]
+"heredity" = ["ui/*", "ui/assets/*"]

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nyxion:heredity:sdk:1:plugin-manifest",
+  "title": "NyXion Heredity plugin manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "plugin_id", "name", "version", "platform", "execution",
+    "api_major", "api_minor", "host_api_min_minor", "host_api_max_minor",
+    "actions", "capabilities", "config_schema"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "plugin_id": {"type": "string", "maxLength": 128, "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 160},
+    "version": {"type": "string", "maxLength": 64, "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[A-Za-z0-9.-]+)?$"},
+    "platform": {"type": "string", "maxLength": 128, "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"},
+    "execution": {"const": "embedded"},
+    "api_major": {"type": "integer", "minimum": 1, "maximum": 65535},
+    "api_minor": {"type": "integer", "minimum": 0, "maximum": 65535},
+    "host_api_min_minor": {"type": "integer", "minimum": 0, "maximum": 65535},
+    "host_api_max_minor": {"type": "integer", "minimum": 0, "maximum": 65535},
+    "actions": {"$ref": "#/$defs/names"},
+    "capabilities": {"$ref": "#/$defs/names"},
+    "ui_pages": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {"$ref": "#/$defs/uiPage"},
+      "description": "Optional host-rendered pages. Page IDs must be unique; the host derives local paths."
+    },
+    "config_schema": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {"type": {"const": "object"}},
+      "description": "Runtime additionally enforces the documented bounded JSON Schema subset."
+    }
+  },
+  "$defs": {
+    "uiPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "view", "icon"],
+      "properties": {
+        "id": {"type": "string", "maxLength": 64, "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"},
+        "title": {"type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[^\\u0000-\\u001F\\u007F]+$"},
+        "view": {"const": "accounts"},
+        "icon": {"const": "users"}
+      }
+    },
+    "names": {
+      "type": "array",
+      "maxItems": 4096,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.-]{0,127}$"}
+    }
+  }
+}

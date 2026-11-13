@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <defs>
+    <linearGradient id="nyxionGrad" x1="50" y1="50" x2="65" y2="65" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="50%" stop-color="#4FACFE" />
+      <stop offset="100%" stop-color="#FF0844" />
+    </linearGradient>
+    <mask id="dnaMask">
+      <g transform="translate(24, 24) scale(3)" fill="none" stroke="white" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m10 16 1.5 1.5" />
+        <path d="m14 8-1.5-1.5" />
+        <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993" />
+        <path d="m16.5 10.5 1 1" />
+        <path d="m17 6-2.891-2.891" />
+        <path d="M2 15c6.667-6 13.333 0 20-6" />
+        <path d="m20 9 .891.891" />
+        <path d="M3.109 14.109 4 15" />
+        <path d="m6.5 12.5 1 1" />
+        <path d="m7 18 2.891 2.891" />
+        <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993" />
+      </g>
+    </mask>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="#1C1F2B" stroke="#32374A" stroke-width="2" />
+  <g fill="none" stroke="#32374A" stroke-width="2" stroke-linecap="square">
+    <path d="M18 30V18h12" />
+    <path d="M90 18h12v12" />
+    <path d="M18 90v12h12" />
+    <path d="M102 90v12H90" />
+  </g>
+  <circle cx="45" cy="40" r="1.5" fill="#00F2FE" opacity="0.8" />
+  <circle cx="35" cy="55" r="1" fill="#00F2FE" opacity="0.5" />
+  <circle cx="75" cy="80" r="1.5" fill="#FF0844" opacity="0.8" />
+  <circle cx="85" cy="65" r="1" fill="#FF0844" opacity="0.5" />
+  <rect width="120" height="120" fill="url(#nyxionGrad)" mask="url(#dnaMask)" />
+</svg>
